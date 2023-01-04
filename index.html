@@ -8,14 +8,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="content">
+    <header class="header">
         <h1 id="title">Etch a sketch</h1>
-        <div class="container"></div>
-        <div class="btn-container">
-            <button class="btn-all reset-btn">Reset</button>
-            <button class="btn-all">Change color</button>
+    </header>
+    <div class="content">
+        <!-- containers for various button features-->
+        <div class="settings-container">
+            <input type="color" id="colorPicker" name="Color-picker" value="#00000">
+            <button id="colorBtn" class="active">Color mode</button>
+            <button id="rainBowBtn" class="Rainbow-mode">Rainbow mode</button>
+            <button id="eraserBtn">Eraser</button>
+            <button id="clearBtn">Clear</button>
+            <div id="sizeValue" class="size-value">16 x 16</div>
+            <input type="range" id="sizeSlider" value="16" min="1" max="64">
         </div>
+        <!-- grid containers initialized from JavaScript-->
+        <div id="grid" class="grid"></div>
     </div>
+    
+<footer class="footer">
+    <p>Copyright ©</p>
+</footer>
 <script src="app.js"></script>
 </body>
 </html>
