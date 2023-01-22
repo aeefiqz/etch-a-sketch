@@ -3,6 +3,7 @@
     --primary-light: #ededed;
     --secondary-light: #fefefe;
     --hover: rgb(231, 225, 225);
+    --button-primary:
 }
   
 
@@ -113,17 +114,20 @@ input[type="color"]::-webkit-color-swatch {
     display:grid;
     width: 400px;
     height: 400px;
-    display: grid;
     margin: 0;
-    border: 1px solid black;
+    box-shadow: 1px 4px 13px 9px rgba(120,99,156,0.75);
+    
     
 }
 
 .grid-item {
     background-color: white;   
-    border:1px solid black;
+    user-select: none;
+    
 }
-
+.grid-lines {
+  border: 1px solid red;
+}
 
 /* MEDIA QUERIES */
 

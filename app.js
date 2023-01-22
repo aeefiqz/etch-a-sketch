@@ -12,6 +12,7 @@ const colorBtn = document.querySelector('#colorBtn');
 const rainBowBtn = document.querySelector('#rainBowBtn');
 const eraserBtn = document.querySelector('#eraserBtn');
 const clearBtn = document.querySelector('#clearBtn');
+const toggleBtn = document.querySelector('#toggleBtn')
 const rangeValue = document.querySelector('#sizeValue')
 const rangeSlider = document.querySelector('#sizeSlider');
 // grid
@@ -31,22 +32,48 @@ function setCurrentSize(newSize) {
 }
 
 function clearGrid() {
-    while (grid.firstChild) {
-        grid.removeChild(grid.firstChild);
-    }
-    createGrid(DEFAULT_SIZE);
+    // this cause an issue with the space at the bottom
+    // while (grid.firstChild) {
+    //     grid.removeChild(grid.firstChild);
+    // }
+    grid.innerHTML = '';
+    
 }
+
 
  
 colorPicker.oninput = (e) => setCurrentColor(e.target.value)
 colorBtn.onclick = () => setCurrentMode('color');
 rainBowBtn.onclick = () => setCurrentMode('rainbow');
 eraserBtn.onclick = () => setCurrentMode('eraser');
-clearBtn.onclick = () => clearGrid();
+clearBtn.onclick = () => reloadGrid();
+toggleBtn.onclick = () => toggleGridLines();
+rangeSlider.onclick = (e) => updateSizeValue(e.target.value);
+rangeSlider.onchange = (e) => changeSize(e.target.value);
 
 let mouseDown = false
 document.body.onmousedown = () => (mouseDown = true)
 document.body.onmouseup = () => (mouseDown = false)
+
+function changeSize(value) {
+    setCurrentSize(value)
+    reloadGrid()
+}
+
+function updateSizeValue(value) {
+    rangeValue.innerHTML = `${value} x ${value}`
+}
+
+function reloadGrid() {
+    clearGrid()
+    createGrid(currentSize)
+}
+function toggleGridLines() {
+    let gridItems = document.querySelectorAll('.grid-item');
+    for (let i = 0; i < gridItems.length; i++) {
+        gridItems[i].classList.toggle('grid-lines')
+    }
+}
 
 function createGrid(size) {
     // create the grid container element
@@ -58,7 +85,7 @@ function createGrid(size) {
     // create the grid items
     for (let i = 0; i < size * size; i++) {
         let gridItem = document.createElement('div');
-        gridItem.classList.add('grid-item');
+        gridItem.classList.add('grid-item','grid-lines');
         grid.addEventListener('mouseover', changeColor)
         grid.addEventListener('mousedown', changeColor)
         grid.appendChild(gridItem);
